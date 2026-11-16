@@ -1,0 +1,21 @@
+﻿# References privees : textes clairs et cles
+data/corpus_genere/reference_privee.json
+
+# Environnements Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Tests et couverture
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Fichiers temporaires
+*.tmp
+*.log
+
+data/corpus_genere/metadonnees.json
+data/corpus_genere_sauvegarde/
+data/corpus_genere_sauvegarde/
