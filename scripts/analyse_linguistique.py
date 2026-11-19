@@ -1,4 +1,5 @@
-
+import runpy
+from pathlib import Path
 import re
 
 # Petit vocabulaire français de départ
@@ -34,3 +35,15 @@ if __name__ == "__main__":
     print("Message analyse :", message)
     print("Score linguistique :", round(score, 2))
     print("Mots reconnus :", score > 0)
+    
+def test_analyse_linguistique_execution_directe(capsys):
+    chemin = Path(__file__).resolve().parents[1]
+    script = chemin / "scripts" / "analyse_linguistique.py"
+
+    runpy.run_path(str(script), run_name="__main__")
+
+    sortie = capsys.readouterr().out
+
+    assert "Message analyse : BONJOUR" in sortie
+    assert "Score linguistique : 1.0" in sortie
+    assert "Mots reconnus : True" in sortie

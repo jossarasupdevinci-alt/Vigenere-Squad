@@ -56,11 +56,16 @@ def test_analyse_linguistique_plusieurs_mots():
     assert analyser_langue("BONJOUR MONDE") == 1.0
 
 
-def test_analyse_linguistique_texte_inconnu():
-    assert analyser_langue("XYZZY QWERTY") == 0.0
-
-
 def test_analyse_linguistique_message_vide():
+    assert analyser_langue("") == 0.0
+
+
+def test_analyse_linguistique_mots_mixtes():
+    assert analyser_langue("BONJOUR XYZZY") == 0.5
+
+
+def test_analyse_linguistique_sans_lettres():
+    assert analyser_langue("123 !!!") == 0.0
     assert analyser_langue("") == 0.0
 
 
@@ -164,3 +169,18 @@ def test_score_moyen_message_court():
     modele = {"BONJ": -1.0}
 
     assert calculer_score_moyen("ABC", modele) == float("-inf")
+
+def test_analyse_linguistique_execution_directe(capsys):
+    from pathlib import Path
+    import runpy
+
+    chemin = Path(__file__).resolve().parents[1]
+    script = chemin / "scripts" / "analyse_linguistique.py"
+
+    runpy.run_path(str(script), run_name="__main__")
+
+    sortie = capsys.readouterr().out
+
+    assert "Message analyse : BONJOUR" in sortie
+    assert "Score linguistique : 1.0" in sortie
+    assert "Mots reconnus : True" in sortie
