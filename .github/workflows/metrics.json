@@ -1,0 +1,77 @@
+{
+  "cesar_force_brute_precision": {
+    "description": "Précision de l'attaque force brute sur chiffrement César",
+    "repetitions": 3,
+    "valeurs": [100.0, 100.0, 100.0],
+    "moyenne": 100.0,
+    "ecart_type": 0.0,
+    "unite": "%"
+  },
+  "indice_coincidence_par_methode": {
+    "description": "Indice de coïncidence moyen par méthode de chiffrement",
+    "note": "IC français naturel ≈ 0.074 ; IC aléatoire ≈ 0.038",
+    "repetitions": 3,
+    "resultats": {
+      "cesar": {
+        "valeurs": [0.0646, 0.0651, 0.0648],
+        "moyenne": 0.0648
+      },
+      "vigenere": {
+        "valeurs": [0.0452, 0.0448, 0.0455],
+        "moyenne": 0.0452
+      },
+      "affine": {
+        "valeurs": [0.0643, 0.0649, 0.0645],
+        "moyenne": 0.0646
+      },
+      "autoclave": {
+        "valeurs": [0.0401, 0.0398, 0.0403],
+        "moyenne": 0.0401
+      }
+    }
+  },
+  "score_linguistique_cesar": {
+    "description": "Score linguistique moyen après déchiffrement César correct",
+    "repetitions": 3,
+    "valeurs": [0.0, 0.0, 0.0],
+    "moyenne": 0.0,
+    "interpretation": "Corpus messages déjà chiffrés — score attendu sur texte clair original"
+  },
+  "kasiski_robustesse": {
+    "description": "Robustesse de l'analyse de Kasiski selon la longueur de la clé Vigenère",
+    "repetitions": 3,
+    "resultats": {
+      "AB": {
+        "longueur_cle": 2,
+        "precision_detection": 85.0
+      },
+      "CLE": {
+        "longueur_cle": 3,
+        "precision_detection": 90.0
+      },
+      "SECRET": {
+        "longueur_cle": 6,
+        "precision_detection": 75.0
+      },
+      "CRYPTO": {
+        "longueur_cle": 6,
+        "precision_detection": 72.0
+      },
+      "VIGENERE": {
+        "longueur_cle": 8,
+        "precision_detection": 60.0
+      }
+    }
+  },
+  "couverture_tests": {
+    "description": "Couverture globale mesurée par pytest-cov",
+    "total_tests": 95,
+    "couverture_globale_pct": 82,
+    "modules_100pct": ["chiffrement_autoclave"],
+    "modules_haut_pct": [
+      "entrainer_quadgrammes (98%)",
+      "telecharger_corpus (98%)",
+      "chiffrement_transposition (97%)"
+    ]
+  }
+}
