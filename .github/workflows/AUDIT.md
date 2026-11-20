@@ -1,94 +1,70 @@
-# Rapport d'Audit — Vigenere-Squad
+# AUDIT DE SÉCURITÉ — Vigenere-Squad
 
-**Version auditée** : 1.0.0  
-**Date** : 2026-11-19  
-**Auditeurs** : Équipe Vigenere-Squad  
+## 1. Objectif de l'audit
 
----
+Cet audit identifie les principaux risques liés au fonctionnement de Vigenere-Squad, notamment son architecture multi-agents, le traitement des entrées utilisateur et l'utilisation éventuelle de modèles de langage.
 
-## 1. Périmètre de l'audit
+## 2. Périmètre
 
-L'audit couvre :
-- Le code source des scripts cryptographiques (`scripts/`)
-- La suite de tests automatisés (`tests/`)
-- Le pipeline CI/CD (`.github/workflows/`)
-- Le corpus de données (`data/`)
+L'audit porte sur :
+- L'orchestrateur et la communication entre agents.
+- Les outils de cryptanalyse.
+- La validation des entrées.
+- Le traitement des réponses des agents.
+- La gestion des erreurs.
+- La traçabilité des opérations.
 
----
+## 3. Analyse des risques selon STRIDE
 
-## 2. Résultats des tests automatisés
-
-| Métrique | Valeur |
-|---|---|
-| Tests exécutés | 95 |
-| Tests réussis | 95 |
-| Tests échoués | 0 |
-| Couverture globale | 82 % |
-| Module à 100 % | `chiffrement_autoclave.py` |
-| Modules > 95 % | `entrainer_quadgrammes.py` (98 %), `telecharger_corpus.py` (98 %), `chiffrement_transposition.py` (97 %) |
-
----
-
-## 3. Analyse de la qualité du code
-
-### 3.1 Points forts
-
-- Séparation claire entre logique de chiffrement et logique d'attaque.
-- Chaque module expose des fonctions nommées de manière cohérente (`chiffrer_X`, `dechiffrer_X`).
-- Les erreurs métier sont levées via des exceptions explicites (`ValueError`).
-- Le corpus est généré de manière reproductible.
-
-### 3.2 Points d'amélioration identifiés
-
-| Fichier | Observation | Priorité |
+| Menace | Risque | Mesure de protection |
 |---|---|---|
-| `scripts/hello.py` | Fichier de test résiduel, couverture 0 %, à supprimer ou documenter | Faible |
-| `scripts/chiffrement_cesar.py` | Définition de `chiffrer_cesar` en double dans le fichier | Moyenne |
-| `scripts/analyse_linguistique.py` | Vocabulaire de référence limité (34 mots) ; étendre pour améliorer la précision | Moyenne |
-| `scripts/score_quadgrammes.py` | Couverture 71 % ; cas limites non testés | Faible |
+| Spoofing | Usurpation d'identité d'un agent | Contrôle des composants autorisés |
+| Tampering | Modification des données échangées | Validation des données et des structures |
+| Repudiation | Difficulté à retracer une opération | Journalisation des événements |
+| Information Disclosure | Exposition de données sensibles | Limitation des informations journalisées |
+| Denial of Service | Entrées volumineuses ou répétées | Contrôle des entrées et gestion des délais |
+| Elevation of Privilege | Appel d'un outil non autorisé | Liste blanche des outils accessibles |
 
----
+## 4. Risques spécifiques aux systèmes multi-agents
 
-## 4. Vérification du corpus
+### Prompt injection
+Une entrée malveillante peut tenter de modifier le comportement d'un agent.
 
-| Critère | Valeur attendue | Valeur mesurée | Statut |
-|---|---|---|---|
-| Nombre de textes | ≥ 150 | 150 | ✅ |
-| Méthodes de chiffrement | 6 | 6 | ✅ |
-| Longueurs variées | Oui | Oui (courts, moyens, longs) | ✅ |
+**Mesure :** traiter les données utilisateur comme des données non fiables et limiter les instructions accessibles aux agents.
 
----
+### Données empoisonnées
+Des données incorrectes peuvent influencer les analyses et les conclusions.
 
-## 5. Vérification des expériences
+**Mesure :** valider les données reçues et privilégier les calculs déterministes pour les opérations cryptographiques.
 
-| Expérience | Répétitions | Résultat | Statut |
-|---|---|---|---|
-| Précision force brute César | 3 | 100 % | ✅ |
-| Indice de coïncidence par méthode | 3 | Mesuré pour 4 méthodes | ✅ |
-| Score linguistique après déchiffrement | 3 | Calculé | ✅ |
-| Robustesse Kasiski | 3 | Testé pour 5 longueurs de clé | ✅ |
+### Hallucinations du modèle
+Un modèle de langage peut produire des informations incorrectes ou inventer des résultats.
 
----
+**Mesure :** ne pas confier les calculs cryptographiques au modèle de langage. Les opérations statistiques et cryptographiques doivent être réalisées par du code Python déterministe.
 
-## 6. Vérification de la boucle de correction
+### Appels d'outils non autorisés
+Un agent peut tenter d'utiliser une fonction qui ne fait pas partie de ses responsabilités.
 
-La boucle de correction est implémentée au niveau de l'orchestrateur : si le score linguistique du texte déchiffré est inférieur à un seuil (0.3), l'orchestrateur relance l'agent Cryptanalyst avec une hypothèse différente.
+**Mesure :** appliquer une liste blanche des outils autorisés pour chaque agent.
 
-**Scénarios de panne des outils testés** :
-- Texte vide → `ValueError` levée correctement
-- Texte trop court pour Kasiski → `ValueError` levée correctement
-- Clé affine avec `pgcd(a, 26) ≠ 1` → `ValueError` levée correctement
+## 5. Gestion des défaillances
 
----
+Les scénarios suivants doivent être évalués :
 
-## 7. Vérification du CI/CD
+- Réponse vide d'un outil.
+- Réponse JSON invalide.
+- Échec d'exécution.
+- Dépassement du délai d'attente.
+- Entrée utilisateur invalide.
 
-- Workflow GitHub Actions opérationnel sur `push` et `pull_request` vers `main`.
-- Python 3.12 utilisé en CI.
-- `pytest-cov` ajouté pour mesure automatique de la couverture.
+Les mécanismes de reprise, de solution de repli ou d'arrêt doivent être vérifiés par des tests.
 
----
+## 6. Limites de l'audit
 
-## 8. Conclusion
+Cet audit constitue une analyse de sécurité du projet. Il ne représente pas une certification ni un audit indépendant de sécurité.
 
-Le projet Vigenere-Squad est en bon état pour une release v1.0.0. Les 95 tests passent, le corpus est complet, et les expériences de robustesse ont été réalisées en 3 répétitions. Les points d'amélioration identifiés sont mineurs et n'affectent pas la fonctionnalité principale.
+Les mesures mentionnées doivent être confrontées à l'implémentation réelle avant de pouvoir être considérées comme validées.
+
+## 7. Conclusion
+
+La sécurité de Vigenere-Squad repose notamment sur la séparation entre les calculs déterministes et l'interprétation par les modèles de langage, la validation des données, le contrôle des outils et la traçabilité des opérations.
