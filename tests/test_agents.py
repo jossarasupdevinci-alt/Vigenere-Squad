@@ -274,6 +274,6 @@ def test_pedagogue_sans_resultat_exploitable():
 
     assert result.status == "success"
     assert result.data["explanation"] == (
-        "Aucun resultat exploitable n'est encore disponible."
+        "Aucun résultat exploitable n'est encore disponible."
     )
     assert result in state.results
