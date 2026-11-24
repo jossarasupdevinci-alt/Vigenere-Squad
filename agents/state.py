@@ -1,4 +1,3 @@
-
 from dataclasses import dataclass, field
 from typing import Any, Literal
 
@@ -31,6 +30,12 @@ class SharedState:
     estimated_key_length: int | None = None
     candidate_key: str | None = None
     plaintext: str | None = None
+    # --- Nouveaux champs pour la boucle de correction ---
+    is_plausible: bool = False
+    rejection_reason: str | None = None
+    excluded_ciphers: list[str] = field(default_factory=list)
+    iteration_count: int = 0
+    # ----------------------------------------------------
     results: list[AgentResult] = field(default_factory=list)
     errors: list[str] = field(default_factory=list)
 
@@ -49,6 +54,10 @@ class SharedState:
             "estimated_key_length": self.estimated_key_length,
             "candidate_key": self.candidate_key,
             "plaintext": self.plaintext,
+            "is_plausible": self.is_plausible,
+            "rejection_reason": self.rejection_reason,
+            "excluded_ciphers": self.excluded_ciphers,
+            "iteration_count": self.iteration_count,
             "results": [
                 {
                     "agent_name": result.agent_name,

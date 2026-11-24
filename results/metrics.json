@@ -1,0 +1,115 @@
+{
+  "date_mesure": "2026-11-23",
+  "corpus_taille": 150,
+  "autoclave_vs_kasiski": {
+    "echantillons": 10,
+    "succes_kasiski_pct": 0.0,
+    "succes_attaque_autoclave_pct": 90.0
+  },
+  "etude_ablation": {
+    "a_sans_llm_deterministe": {
+      "modele": "aucun (heuristique)",
+      "repetitions": 1,
+      "taux_clair_exact_moyenne_pct": 16.67,
+      "taux_clair_exact_ecart_type": 0.0,
+      "iterations_moyennes": 2.0,
+      "temps_moyen_s": 25.5455,
+      "runs": [
+        {
+          "taux_clair_exact_pct": 16.67,
+          "iterations_moyennes": 2.0,
+          "temps_moyen_par_chiffre_s": 25.5455
+        }
+      ]
+    },
+    "b_llm_8go_llama3_2_3b": {
+      "modele": "llama3.2:3b",
+      "repetitions": 1,
+      "taux_clair_exact_moyenne_pct": 16.67,
+      "taux_clair_exact_ecart_type": 0.0,
+      "iterations_moyennes": 2.0,
+      "temps_moyen_s": 35.0524,
+      "runs": [
+        {
+          "taux_clair_exact_pct": 16.67,
+          "iterations_moyennes": 2.0,
+          "temps_moyen_par_chiffre_s": 35.0524
+        }
+      ]
+    },
+    "c_llm_leger_qwen3_0_6b": {
+      "modele": "qwen3:0.6b",
+      "repetitions": 1,
+      "taux_clair_exact_moyenne_pct": 16.67,
+      "taux_clair_exact_ecart_type": 0.0,
+      "iterations_moyennes": 2.0,
+      "temps_moyen_s": 35.7992,
+      "runs": [
+        {
+          "taux_clair_exact_pct": 16.67,
+          "iterations_moyennes": 2.0,
+          "temps_moyen_par_chiffre_s": 35.7992
+        }
+      ]
+    }
+  },
+  "robustesse": {
+    "sans_espaces_ni_ponctuation": {
+      "taux_clair_exact_pct": 50.0,
+      "iterations_moyennes": 2.0,
+      "temps_moyen_par_chiffre_s": 17.1181
+    },
+    "avec_5pct_fautes": {
+      "taux_clair_exact_pct": 0.0,
+      "iterations_moyennes": 2.0,
+      "temps_moyen_par_chiffre_s": 17.1946
+    },
+    "corpus_anglais": {
+      "taux_clair_exact_pct": 0.0,
+      "iterations_moyennes": 2.0,
+      "temps_moyen_par_chiffre_s": 1.9917
+    }
+  },
+  "shannon": [
+    {
+      "longueur_cle": 3,
+      "longueur_min_succes_90_pct": 180,
+      "distance_unicite_shannon": 4.41
+    },
+    {
+      "longueur_cle": 4,
+      "longueur_min_succes_90_pct": 500,
+      "distance_unicite_shannon": 5.88
+    },
+    {
+      "longueur_cle": 5,
+      "longueur_min_succes_90_pct": 250,
+      "distance_unicite_shannon": 7.34
+    },
+    {
+      "longueur_cle": 6,
+      "longueur_min_succes_90_pct": 500,
+      "distance_unicite_shannon": 8.81
+    },
+    {
+      "longueur_cle": 7,
+      "longueur_min_succes_90_pct": 250,
+      "distance_unicite_shannon": 10.28
+    },
+    {
+      "longueur_cle": 8,
+      "longueur_min_succes_90_pct": 500,
+      "distance_unicite_shannon": 11.75
+    },
+    {
+      "longueur_cle": 9,
+      "longueur_min_succes_90_pct": 500,
+      "distance_unicite_shannon": 13.22
+    },
+    {
+      "longueur_cle": 10,
+      "longueur_min_succes_90_pct": 500,
+      "distance_unicite_shannon": 14.69
+    }
+  ]
+}
