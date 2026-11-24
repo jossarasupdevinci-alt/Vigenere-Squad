@@ -1,5 +1,5 @@
 {
-  "date_mesure": "2026-11-23",
+  "date_mesure": "2026-11-24",
   "corpus_taille": 150,
   "autoclave_vs_kasiski": {
     "echantillons": 10,
@@ -13,12 +13,12 @@
       "taux_clair_exact_moyenne_pct": 16.67,
       "taux_clair_exact_ecart_type": 0.0,
       "iterations_moyennes": 2.0,
-      "temps_moyen_s": 25.5455,
+      "temps_moyen_s": 42.1435,
       "runs": [
         {
           "taux_clair_exact_pct": 16.67,
           "iterations_moyennes": 2.0,
-          "temps_moyen_par_chiffre_s": 25.5455
+          "temps_moyen_par_chiffre_s": 42.1435
         }
       ]
     },
@@ -28,12 +28,12 @@
       "taux_clair_exact_moyenne_pct": 16.67,
       "taux_clair_exact_ecart_type": 0.0,
       "iterations_moyennes": 2.0,
-      "temps_moyen_s": 35.0524,
+      "temps_moyen_s": 47.7998,
       "runs": [
         {
           "taux_clair_exact_pct": 16.67,
           "iterations_moyennes": 2.0,
-          "temps_moyen_par_chiffre_s": 35.0524
+          "temps_moyen_par_chiffre_s": 47.7998
         }
       ]
     },
@@ -43,12 +43,12 @@
       "taux_clair_exact_moyenne_pct": 16.67,
       "taux_clair_exact_ecart_type": 0.0,
       "iterations_moyennes": 2.0,
-      "temps_moyen_s": 35.7992,
+      "temps_moyen_s": 49.645,
       "runs": [
         {
           "taux_clair_exact_pct": 16.67,
           "iterations_moyennes": 2.0,
-          "temps_moyen_par_chiffre_s": 35.7992
+          "temps_moyen_par_chiffre_s": 49.645
         }
       ]
     }
@@ -57,17 +57,17 @@
     "sans_espaces_ni_ponctuation": {
       "taux_clair_exact_pct": 50.0,
       "iterations_moyennes": 2.0,
-      "temps_moyen_par_chiffre_s": 17.1181
+      "temps_moyen_par_chiffre_s": 29.4801
     },
     "avec_5pct_fautes": {
       "taux_clair_exact_pct": 0.0,
       "iterations_moyennes": 2.0,
-      "temps_moyen_par_chiffre_s": 17.1946
+      "temps_moyen_par_chiffre_s": 29.9596
     },
     "corpus_anglais": {
       "taux_clair_exact_pct": 0.0,
       "iterations_moyennes": 2.0,
-      "temps_moyen_par_chiffre_s": 1.9917
+      "temps_moyen_par_chiffre_s": 2.9016
     }
   },
   "shannon": [
