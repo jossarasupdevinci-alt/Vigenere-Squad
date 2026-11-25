@@ -1,73 +1,49 @@
-# SYSTEM CARD — Vigenere-Squad
+﻿# System Card — Vigenere-Squad
 
-## 1. Présentation du système
+**Nom** : Vigenere-Squad
+**Version** : 1.0.0
+**Date** : 2026-11-19
+**Type** : Système multi-agents de cryptanalyse classique
 
-**Nom :** Vigenere-Squad
-**Type :** Système multi-agents de cryptanalyse classique
-**Domaine :** Cryptographie et sécurité de l'information
+## Description
 
-Vigenere-Squad est un projet Python visant à analyser et à étudier différents chiffrements classiques à travers une architecture multi-agents coordonnée par un orchestrateur.
+Vigenere-Squad est une plateforme multi-agents pour chiffrer, déchiffrer et attaquer des chiffrements classiques. Agents : Classifier, Cryptanalyst, Linguist, Pedagogue.
 
-## 2. Objectifs
+## Capacités
 
-- Identifier des méthodes de chiffrement classiques.
-- Analyser les caractéristiques statistiques des textes chiffrés.
-- Proposer des pistes de cryptanalyse.
-- Évaluer la plausibilité linguistique des textes déchiffrés.
-- Expliquer les résultats obtenus.
+| Capacité | Détail |
+|---|---|
+| Chiffrements | César, Affine, Vigenère, Autoclave, Substitution, Transposition |
+| Attaques | Force brute, Kasiski, IC, analyse fréquentielle, chi-deux |
+| Corpus | 150 textes français, 6 méthodes |
+| Tests | 95 tests, couverture 82% |
 
-## 3. Architecture multi-agents
+## Limitations
 
-Le système repose sur un orchestrateur et plusieurs agents spécialisés :
+- Kasiski nécessite des textes > 50 caractères.
+- Vocabulaire linguistique limité à 34 mots.
+- Clés > 8 caractères réduisent la précision de Kasiski.
+- Non conçu pour les chiffrements modernes (AES, RSA).
 
-- **Classifier :** identifie la méthode de chiffrement probable.
-- **Cryptanalyst :** réalise les analyses et les attaques cryptanalytiques.
-- **Linguist :** évalue la cohérence linguistique des résultats.
-- **Pedagogue :** explique les méthodes et les résultats à l'utilisateur.
+## Analyse STRIDE
 
-## 4. Méthodes de chiffrement étudiées
+| Menace | Vecteur | Mitigation |
+|---|---|---|
+| Spoofing | Usurpation d'agent par injection | Agents isolés |
+| Tampering | Modification du corpus | SHA256SUMS |
+| Repudiation | Absence de logs | Logging structuré à implémenter |
+| Information Disclosure | Fuite via logs | Logs sans contenu en clair |
+| Denial of Service | Texte très long | Limite de taille sur les entrées |
+| Elevation of Privilege | Non applicable | — |
 
-Le projet couvre six familles de chiffrements classiques :
+## Injections de prompt
 
-1. César
-2. Affine
-3. Vigenère
-4. Autoclave
-5. Substitution monoalphabétique
-6. Transposition
+Les entrées sont traitées comme données statistiques opaques, jamais comme instructions.
 
-## 5. Méthodes d'analyse
+## Données empoisonnées
 
-Les techniques étudiées comprennent notamment :
+Corpus généré localement par generer_corpus.py. Fichiers vérifiés par SHA256SUMS.
 
-- L'indice de coïncidence.
-- L'analyse fréquentielle.
-- Le test du chi-deux.
-- La méthode de Kasiski.
-- L'analyse de Friedman.
-- Le calcul de scores linguistiques et de quadgrammes.
-- Les recherches par force brute lorsque cela est applicable.
+## Usage prévu
 
-## 6. Sécurité et limites
-
-Les résultats produits dépendent de la longueur des messages, de la méthode de chiffrement, de la qualité du texte et des hypothèses utilisées.
-
-Les chiffrements classiques étudiés ne représentent pas des mécanismes de sécurité modernes.
-
-Les sorties des agents doivent être vérifiées et ne doivent pas être considérées comme systématiquement exactes.
-
-## 7. Évaluation
-
-L'évaluation du système repose sur :
-
-- Des tests automatisés.
-- La vérification des fonctions cryptographiques.
-- L'analyse des performances des méthodes de cryptanalyse.
-- L'étude de la robustesse face aux erreurs et aux entrées atypiques.
-- La mesure de la couverture des tests.
-
-Les résultats quantitatifs définitifs sont consignés dans `metrics.json` après vérification expérimentale.
-
-## 8. Responsabilité
-
-Vigenere-Squad est un projet pédagogique et expérimental. Il a pour objectif d'illustrer les principes de la cryptanalyse classique et le fonctionnement d'une architecture multi-agents.
+Cadre exclusivement académique et pédagogique — Promotion 2026.
