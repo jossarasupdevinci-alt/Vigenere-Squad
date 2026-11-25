@@ -12,14 +12,14 @@
     "note": "IC français naturel ≈ 0.074 ; IC aléatoire ≈ 0.038",
     "repetitions": 3,
     "resultats": {
-      "cesar": {"valeurs": [0.0646, 0.0651, 0.0648], "moyenne": 0.0648},
-      "vigenere": {"valeurs": [0.0452, 0.0448, 0.0455], "moyenne": 0.0452},
-      "affine": {"valeurs": [0.0643, 0.0649, 0.0645], "moyenne": 0.0646},
-      "autoclave": {"valeurs": [0.0401, 0.0398, 0.0403], "moyenne": 0.0401}
+      "cesar": {"moyenne": 0.0648},
+      "vigenere": {"moyenne": 0.0452},
+      "affine": {"moyenne": 0.0646},
+      "autoclave": {"moyenne": 0.0401}
     }
   },
   "kasiski_robustesse": {
-    "description": "Robustesse de Kasiski selon la longueur de la clé Vigenère",
+    "description": "Robustesse de Kasiski selon la longueur de la clé",
     "repetitions": 3,
     "resultats": {
       "AB": {"longueur_cle": 2, "precision_detection": 85.0},
